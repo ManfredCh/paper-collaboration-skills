@@ -1,0 +1,23 @@
+{
+  "title": "Literature Search Results",
+  "note": "Fictional example of how to record papers, relevant findings, and verification levels.",
+  "items": [
+    {
+      "id": "context-memory",
+      "paper": "Segment Context for Sequential Prediction",
+      "publication": "Example proceedings · 2026",
+      "topic": "Persistent context",
+      "finding": "Compares a fixed context with context updated after each segment.",
+      "verification": "Methods and settings checked",
+      "sources": [{"label": "Example methods entry", "href": "bilingual.html#item-method-order"}]
+    },
+    {
+      "id": "windowing-study",
+      "paper": "A Study of Observation Windows",
+      "publication": "Example preprint · v2",
+      "topic": "Window design",
+      "finding": "The abstract describes a comparison of several window lengths.",
+      "verification": "Abstract only"
+    }
+  ]
+}

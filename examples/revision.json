@@ -1,0 +1,23 @@
+{
+  "title": "Annotation Comparison",
+  "baseline": "Fictional author review of a methods passage.",
+  "items": [
+    {
+      "id": "timing",
+      "location": "Methods · Available context",
+      "status": "Accepted",
+      "comment": "Specify when the observations are available.",
+      "before": "The predictor conditions on contextual observations.",
+      "after": "The predictor conditions on observations collected before the target segment.",
+      "reason": "The edit spells out the temporal restriction.",
+      "sources": [{"label": "Example input definition", "href": "bilingual.html#item-method-input"}]
+    },
+    {
+      "id": "update",
+      "location": "Methods · Update order",
+      "status": "Pending",
+      "before": "",
+      "after": "The context is updated after each completed segment."
+    }
+  ]
+}

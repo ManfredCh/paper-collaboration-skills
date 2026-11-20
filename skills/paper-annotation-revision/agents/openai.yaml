@@ -1,0 +1,4 @@
+interface:
+  display_name: "Paper Annotation Revision"
+  short_description: "Review annotations and merge approved manuscript edits"
+  default_prompt: "Use $paper-annotation-revision to turn these comments into an annotated before-and-after HTML review."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Paper Source Trace"
+  short_description: "Trace manuscript claims to exact passages and run records"
+  default_prompt: "Use $paper-source-trace to verify the claims in this section and link to the exact evidence."

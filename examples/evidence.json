@@ -1,0 +1,21 @@
+{
+  "title": "Claim and Evidence",
+  "note": "Fictional example of tracing a manuscript statement to its evidence.",
+  "items": [
+    {
+      "id": "observations",
+      "claim": "Conditioning uses observations available before the target segment.",
+      "role": "Implementation",
+      "support": "The input contract selects observations from earlier segments.",
+      "status": "Supported in this example",
+      "sources": [{"label": "Example input definition", "href": "bilingual.html#item-method-input"}]
+    },
+    {
+      "id": "gain",
+      "claim": "Updating context improves performance on long sequences.",
+      "role": "Evaluation",
+      "support": "A matched long-sequence comparison is needed to support the claim.",
+      "status": "Evidence needed"
+    }
+  ]
+}

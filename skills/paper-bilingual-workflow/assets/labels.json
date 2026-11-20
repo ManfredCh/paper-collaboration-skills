@@ -1,0 +1,16 @@
+{
+  "lang": "en",
+  "navigation": "Paragraphs",
+  "english": "English manuscript",
+  "translation": "Review translation",
+  "sources": "Sources",
+  "paper": "Paper",
+  "publication": "Publication",
+  "topic": "Topic",
+  "finding": "Relevant finding",
+  "verification": "Verification",
+  "claim": "Manuscript claim",
+  "role": "Evidence role",
+  "support": "What the source supports",
+  "status": "Status"
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Paper Literature Search"
+  short_description: "Find research papers and verify primary source links"
+  default_prompt: "Use $paper-literature-search to find papers on this topic and group them by approach."

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bilingual Manuscript Review</title>
+<style>
+:root { color-scheme: light; font-family: "Source Sans 3", "Noto Sans CJK SC", system-ui, sans-serif; color: #17252c; background: #f7f8f7; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { max-width: 72rem; margin: auto; padding: 2.5rem clamp(0.75rem, 4vw, 3rem); }
+h1, h2, h3, p, blockquote { margin: 0; }
+h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); line-height: 1.25; }
+h2 { font-size: 1.25rem; margin-bottom: 0.75rem; }
+h3 { font-size: 0.9rem; margin-bottom: 0.4rem; }
+p, li, td, th { line-height: 1.6; }
+a { color: #175967; text-underline-offset: 0.2em; overflow-wrap: anywhere; }
+a:focus-visible, summary:focus-visible, .table-scroll:focus-visible { outline: 2px solid #175967; outline-offset: 3px; }
+.note { color: #48595e; margin-top: 0.65rem; }
+.text { white-space: pre-wrap; overflow-wrap: anywhere; }
+nav, article, .table-scroll { margin-top: 1.5rem; }
+nav ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; }
+article { padding: clamp(0.9rem, 3vw, 1.6rem); background: #fff; border: 1px solid #ccd8d9; border-radius: 0.65rem; scroll-margin-top: 1rem; }
+article:target { border-color: #175967; }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+.pair.single { grid-template-columns: minmax(0, 1fr); }
+.pair section { padding: 0.85rem; border: 1px solid #dde5e6; border-radius: 0.4rem; }
+details { margin-top: 1rem; }
+summary { cursor: pointer; color: #175967; }
+.links { padding-inline-start: 1.2rem; margin: 0.4rem 0 0; }
+.links blockquote { color: #48595e; margin-top: 0.25rem; }
+.table-scroll { overflow-x: auto; background: #fff; border: 1px solid #ccd8d9; border-radius: 0.65rem; }
+table { border-collapse: collapse; width: 100%; min-width: 45rem; }
+thead th { background: #e8efee; }
+th, td { text-align: start; vertical-align: top; padding: 0.75rem; border-bottom: 1px solid #dde5e6; }
+tbody th { min-width: 9rem; font-weight: 600; }
+tbody td:last-child { min-width: 8rem; }
+td .links { margin-top: 0; }
+tr:target { background: #edf5f5; }
+@media (max-width: 44rem) { .pair { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body>
+<main>
+<header><h1 id="page-title">Bilingual Manuscript Review</h1><p class="note text">Fictional example showing a manuscript and its author review copy.</p></header>
+<nav aria-label="Paragraphs"><ul><li><a href="#item-method-input">Methods · Available context</a></li><li><a href="#item-method-order">Methods · Update order</a></li></ul></nav><article id="item-method-input"><h2>Methods · Available context</h2><div class="pair"><section><h3>English manuscript</h3><p class="text" lang="en">The predictor conditions on observations collected before the target segment.</p></section><section><h3>Review translation</h3><p class="text">Review paraphrase: the inputs are observations from earlier segments.</p></section></div><details><summary>Sources</summary><ul class="links"><li><a href="evidence.html#item-observations">Claim and evidence example</a></li></ul></details></article>
+<article id="item-method-order"><h2>Methods · Update order</h2><div class="pair"><section><h3>English manuscript</h3><p class="text" lang="en">The context is updated after each completed segment.</p></section><section><h3>Review translation</h3><p class="text">Review paraphrase: add a segment to the context after completing it.</p></section></div></article>
+</main>
+</body>
+</html>
