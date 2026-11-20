@@ -1,4 +1,4 @@
 interface:
-  display_name: "Bilingual Paper Workflow"
-  short_description: "Draft, review, and merge bilingual research manuscripts"
-  default_prompt: "Use $paper-bilingual-workflow to review my paper paragraph by paragraph with the LaTeX source and an HTML translation."
+  display_name: "Paper Writing and Review"
+  short_description: "Draft and review research papers in one or two languages"
+  default_prompt: "Use $paper-bilingual-workflow to review my paper paragraph by paragraph in the manuscript's language."

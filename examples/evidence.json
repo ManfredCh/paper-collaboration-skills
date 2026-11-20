@@ -1,5 +1,6 @@
 {
   "title": "Claim and Evidence",
+  "lang": "en",
   "note": "Fictional example of tracing a manuscript statement to its evidence.",
   "items": [
     {
@@ -8,7 +9,12 @@
       "role": "Implementation",
       "support": "The input contract selects observations from earlier segments.",
       "status": "Supported in this example",
-      "sources": [{"label": "Example input definition", "href": "bilingual.html#item-method-input"}]
+      "sources": [
+        {
+          "label": "Example input definition",
+          "href": "bilingual.html#item-method-input"
+        }
+      ]
     },
     {
       "id": "gain",

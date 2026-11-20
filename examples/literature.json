@@ -1,5 +1,6 @@
 {
   "title": "Literature Search Results",
+  "lang": "en",
   "note": "Fictional example of how to record papers, relevant findings, and verification levels.",
   "items": [
     {
@@ -9,7 +10,12 @@
       "topic": "Persistent context",
       "finding": "Compares a fixed context with context updated after each segment.",
       "verification": "Methods and settings checked",
-      "sources": [{"label": "Example methods entry", "href": "bilingual.html#item-method-order"}]
+      "sources": [
+        {
+          "label": "Example methods entry",
+          "href": "bilingual.html#item-method-order"
+        }
+      ]
     },
     {
       "id": "windowing-study",

@@ -1,19 +1,23 @@
 {
-  "title": "Bilingual Manuscript Review",
-  "note": "Fictional example showing a manuscript and its author review copy.",
+  "title": "Manuscript Review",
+  "lang": "en",
+  "note": "Fictional example of an English-only paragraph review.",
   "items": [
     {
       "id": "method-input",
       "location": "Methods · Available context",
-      "en": "The predictor conditions on observations collected before the target segment.",
-      "translation": "Review paraphrase: the inputs are observations from earlier segments.",
-      "sources": [{"label": "Claim and evidence example", "href": "evidence.html#item-observations"}]
+      "sources": [
+        {
+          "label": "Claim and evidence example",
+          "href": "evidence.html#item-observations"
+        }
+      ],
+      "text": "The predictor conditions on observations collected before the target segment."
     },
     {
       "id": "method-order",
       "location": "Methods · Update order",
-      "en": "The context is updated after each completed segment.",
-      "translation": "Review paraphrase: add a segment to the context after completing it."
+      "text": "The context is updated after each completed segment."
     }
   ]
 }

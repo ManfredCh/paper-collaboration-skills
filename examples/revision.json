@@ -1,5 +1,6 @@
 {
   "title": "Annotation Comparison",
+  "lang": "en",
   "baseline": "Fictional author review of a methods passage.",
   "items": [
     {
@@ -10,7 +11,12 @@
       "before": "The predictor conditions on contextual observations.",
       "after": "The predictor conditions on observations collected before the target segment.",
       "reason": "The edit spells out the temporal restriction.",
-      "sources": [{"label": "Example input definition", "href": "bilingual.html#item-method-input"}]
+      "sources": [
+        {
+          "label": "Example input definition",
+          "href": "bilingual.html#item-method-input"
+        }
+      ]
     },
     {
       "id": "update",

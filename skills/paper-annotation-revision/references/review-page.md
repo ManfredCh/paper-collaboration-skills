@@ -9,8 +9,9 @@ python3 skills/paper-annotation-revision/scripts/render_review.py examples/revis
 The input has a `title`, an optional `baseline`, and a nonempty array of `items`.
 
 - Every item has a unique `id`, a `location`, and a `status`. An ID starts with a lowercase letter and may contain lowercase letters, digits, and hyphens. Its anchor is `#review-<id>`.
-- Status values are `Pending`, `Accepted`, `Applied`, `Evidence needed`, and `Declined`.
+- Write `status` in the review language. English examples include `Pending`, `Accepted`, `Applied`, `Evidence needed`, and `Declined`.
+- Set the top-level `lang` for a new comparison. Provide a `labels` object with translations of the [label keys](../assets/labels.json) for languages outside the bundled English labels. Set `manuscript_lang` and `translation_lang` when the two text languages differ from the page language.
 - Supply `before` and `after` for a comparison. Use an empty `before` for an insertion, an empty `after` for a deletion, or omit `after` to show the original on its own.
 - Add `comment`, `translation`, and `reason` as needed. Each entry in the optional `sources` array has a `label`, an `href`, and an optional `excerpt`.
 
-Use [the example input](https://github.com/ManfredCh/paper-collaboration-skills/blob/v1.0.0/examples/revision.json) as a starting point. Run the example command from a checkout or substitute the installed skill path and your own input file. The page renders with local styles.
+Use [the example input](https://github.com/ManfredCh/paper-collaboration-skills/blob/v1.1.0/examples/revision.json) as a starting point. Run the example command from a checkout or substitute the installed skill path and your own input file. The page renders with local styles.

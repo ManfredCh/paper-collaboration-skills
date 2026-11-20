@@ -1,7 +1,6 @@
 {
   "lang": "en",
   "navigation": "Paragraphs",
-  "english": "English manuscript",
   "translation": "Review translation",
   "sources": "Sources",
   "paper": "Paper",
@@ -12,5 +11,6 @@
   "claim": "Manuscript claim",
   "role": "Evidence role",
   "support": "What the source supports",
-  "status": "Status"
+  "status": "Status",
+  "manuscript": "Manuscript"
 }

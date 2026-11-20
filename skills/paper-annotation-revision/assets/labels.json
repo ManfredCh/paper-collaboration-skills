@@ -1,0 +1,11 @@
+{
+  "lang": "en",
+  "original": "Original",
+  "proposed": "Proposed",
+  "added": "Whole passage added",
+  "deleted": "Whole passage deleted",
+  "translation": "Translation",
+  "rationale": "Rationale",
+  "sources": "Sources",
+  "navigation": "Annotations"
+}

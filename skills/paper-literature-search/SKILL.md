@@ -5,6 +5,8 @@ description: Find academic papers by title, research question, or comparison cri
 
 # Paper Literature Search
 
+Write the synthesis and HTML in the author's requested language, or in the language of the request when no preference is stated. Preserve paper titles and direct quotations in the source language.
+
 1. Define what would answer the question. For a known paper, search by title, author, or identifier. For a topic, combine the task and method with likely synonyms. For a numeric comparison, establish the unit, model variant, and whether the setting belongs to training, inference, or evaluation.
 2. Start with the author's bibliography and seed papers when available. Expand by method family, terminology, or citation trail. When online search is allowed, query public terms and titles. Keep private draft text and unpublished numbers in the workspace.
 3. Open the paper, supplement, proceedings entry, or author-maintained release. Consolidate versions using an established paper identity, DOI, or arXiv ID. Keep version distinctions that affect the answer.

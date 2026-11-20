@@ -9,8 +9,11 @@ from pathlib import Path
 from string import Template
 from urllib.parse import urlsplit
 
+from _page_language import language_tag, page_labels
+
 ASSETS = Path(__file__).resolve().parents[1] / "assets"
 ITEM_ID = re.compile(r"[a-z][a-z0-9-]*")
+REVIEW_LABELS = ("navigation", "manuscript", "translation", "sources")
 TABLE_COLUMNS = {
     "literature": ("paper", "publication", "topic", "finding", "verification", "sources"),
     "evidence": ("claim", "role", "support", "status", "sources"),
@@ -47,19 +50,23 @@ def source_links(item):
     return f'<ul class="links">{"".join(links)}</ul>' if links else ""
 
 
-def render_bilingual(items, labels):
+def render_bilingual(items, labels, lang, manuscript_lang, translation_lang):
     entries = []
     navigation = []
     for anchor, item in items:
         location = escape(field(item, "location", required=True))
-        english = escape(field(item, "en", required=True))
+        text_key = "text" if "text" in item else "en"
+        text = escape(field(item, text_key, required=True))
+        text_lang = manuscript_lang or ("en" if text_key == "en" else lang)
         translation = escape(field(item, "translation"))
         paired_class = "pair" if translation else "pair single"
         columns = [
-            f'<section><h3>{labels["english"]}</h3><p class="text" lang="en">{english}</p></section>'
+            f'<section><h3>{labels["manuscript"]}</h3><p class="text" lang="{text_lang}">{text}</p></section>'
         ]
         if translation:
-            columns.append(f'<section><h3>{labels["translation"]}</h3><p class="text">{translation}</p></section>')
+            columns.append(
+                f'<section><h3>{labels["translation"]}</h3><p class="text" lang="{translation_lang}">{translation}</p></section>'
+            )
         sources = source_links(item)
         references = f'<details><summary>{labels["sources"]}</summary>{sources}</details>' if sources else ""
         entries.append(
@@ -103,12 +110,18 @@ def render_page(layout, manifest):
         items.append((f"item-{key}", item))
         seen.add(key)
 
-    raw_labels = json.loads((ASSETS / "labels.json").read_text(encoding="utf-8"))
-    labels = {key: escape(value, quote=True) for key, value in raw_labels.items()}
-    content = (render_bilingual(items, labels) if layout == "bilingual"
-               else render_table(layout, items, labels))
+    required = REVIEW_LABELS if layout == "bilingual" else TABLE_COLUMNS[layout]
+    lang, labels = page_labels(ASSETS, manifest, required)
+    if layout == "bilingual":
+        manuscript_lang = field(manifest, "manuscript_lang")
+        if manuscript_lang:
+            manuscript_lang = language_tag(manuscript_lang)
+        translation_lang = language_tag(field(manifest, "translation_lang") or lang)
+        content = render_bilingual(items, labels, lang, manuscript_lang, translation_lang)
+    else:
+        content = render_table(layout, items, labels)
     return Template((ASSETS / "paper-page.html").read_text(encoding="utf-8")).substitute(
-        lang=labels["lang"], title=escape(title), content=content,
+        lang=lang, title=escape(title), content=content,
         note=f'<p class="note text">{escape(note)}</p>' if note else "",
     )
 

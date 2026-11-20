@@ -10,8 +10,10 @@ from pathlib import Path
 from string import Template
 from urllib.parse import urlsplit
 
-TEMPLATE = Path(__file__).resolve().parents[1] / "assets" / "review.html"
-STATUS = {"Pending", "Accepted", "Applied", "Evidence needed", "Declined"}
+from _page_language import language_tag, page_labels
+
+ASSETS = Path(__file__).resolve().parents[1] / "assets"
+REVIEW_LABELS = ("original", "proposed", "added", "deleted", "translation", "rationale", "sources", "navigation")
 ITEM_ID = re.compile(r"[a-z][a-z0-9-]*")
 TOKEN = re.compile(r"\s+|\w+|[^\w\s]")
 
@@ -43,24 +45,27 @@ def mark_changes(before, after):
     return "".join(original_html), "".join(proposed_html)
 
 
-def comparison(item, before, after):
+def comparison(item, before, after, labels, lang, manuscript_lang):
     if "before" in item and "after" in item:
         old_html, new_html = mark_changes(before, after)
-        old_html = old_html or "Whole passage added"
-        new_html = new_html or "Whole passage deleted"
+        old_html = old_html or labels["added"]
+        new_html = new_html or labels["deleted"]
     else:
         old_html, new_html = escape(before), escape(after)
 
     panels = []
-    for heading, content in (("Original", old_html), ("Proposed", new_html)):
+    for heading, content, passage in (
+        (labels["original"], old_html, before), (labels["proposed"], new_html, after)
+    ):
         if content:
+            content_lang = manuscript_lang if passage else lang
             panels.append(
-                f'<section><h3>{heading}</h3><p class="text" lang="en">{content}</p></section>'
+                f'<section><h3>{heading}</h3><p class="text" lang="{content_lang}">{content}</p></section>'
             )
     return f'<div class="compare">{"".join(panels)}</div>' if panels else ""
 
 
-def source_list(sources, context):
+def source_list(sources, context, heading):
     links = []
     for index, source in enumerate(sources, 1):
         location = f"{context} source {index}"
@@ -79,13 +84,14 @@ def source_list(sources, context):
             raise ValueError(f"{location} must use a complete HTTP(S) URL")
         quote = f'<blockquote class="text">{escape(excerpt)}</blockquote>' if excerpt else ""
         links.append(f'<li><a href="{escape(href, quote=True)}">{escape(label)}</a>{quote}</li>')
-    return f'<details><summary>Sources</summary><ul>{"".join(links)}</ul></details>' if links else ""
+    return f'<details><summary>{heading}</summary><ul>{"".join(links)}</ul></details>' if links else ""
 
 
-def note(heading, content):
+def note(heading, content, lang=""):
     if not content:
         return ""
-    return f'<div class="item-note"><h3>{heading}</h3><p class="text">{escape(content)}</p></div>'
+    lang_attr = f' lang="{lang}"' if lang else ""
+    return f'<div class="item-note"><h3>{heading}</h3><p class="text"{lang_attr}>{escape(content)}</p></div>'
 
 
 def render_review(review):
@@ -94,6 +100,9 @@ def render_review(review):
     title = text_field(review, "title", "Review", required=True)
     baseline = text_field(review, "baseline", "Review")
     items = list_field(review, "items", "Review", required=True)
+    lang, labels = page_labels(ASSETS, review, REVIEW_LABELS)
+    manuscript_lang = language_tag(text_field(review, "manuscript_lang", "Review") or review.get("lang", "en"))
+    translation_lang = language_tag(text_field(review, "translation_lang", "Review") or lang)
     seen = set()
     articles = []
     navigation = []
@@ -106,14 +115,12 @@ def render_review(review):
             raise ValueError(f"{context} has an invalid or repeated ID")
         seen.add(item_id)
         location = escape(text_field(item, "location", context, required=True))
-        status = text_field(item, "status", context, required=True)
-        if status not in STATUS:
-            raise ValueError(f"{context} uses an unsupported status")
+        status = escape(text_field(item, "status", context, required=True))
 
         before = text_field(item, "before", context)
         after = text_field(item, "after", context)
         comment = text_field(item, "comment", context)
-        translation = text_field(item, "translation", context)
+        translation = text_field(item, "translation" if "translation" in item else "zh", context)
         reason = text_field(item, "reason", context)
         sources = list_field(item, "sources", context)
         anchor = f"review-{item_id}"
@@ -124,17 +131,18 @@ def render_review(review):
             f'<header class="item-header"><h2 id="{heading_id}">{location}</h2>',
             f'<p class="status">{status}</p></header>',
             f'<blockquote class="comment text">{escape(comment)}</blockquote>' if comment else "",
-            comparison(item, before, after),
-            note("Translation", translation),
-            note("Rationale", reason),
-            source_list(sources, context),
+            comparison(item, before, after, labels, lang, manuscript_lang),
+            note(labels["translation"], translation, translation_lang),
+            note(labels["rationale"], reason),
+            source_list(sources, context, labels["sources"]),
             "</article>",
         )))
 
-    return Template(TEMPLATE.read_text(encoding="utf-8")).substitute(
+    return Template((ASSETS / "review.html").read_text(encoding="utf-8")).substitute(
+        lang=lang,
         title=escape(title),
         baseline=f'<p class="baseline">{escape(baseline)}</p>' if baseline else "",
-        navigation=f'<nav aria-label="Annotations"><ul>{"".join(navigation)}</ul></nav>' if len(articles) > 1 else "",
+        navigation=f'<nav aria-label="{labels["navigation"]}"><ul>{"".join(navigation)}</ul></nav>' if len(articles) > 1 else "",
         items="\n".join(articles),
     )
 
